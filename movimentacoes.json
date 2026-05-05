@@ -68,5 +68,21 @@
         "categoria": "lazer",
         "valor": 40.0,
         "data": "03/05/2026 12:20"
+    },
+    {
+        "id": 1,
+        "tipo": "receita",
+        "descricao": "salario",
+        "categoria": "pagamento",
+        "valor": 1800.0,
+        "data": "05/05/2026 15:00"
+    },
+    {
+        "id": 2,
+        "tipo": "despesa",
+        "descricao": "cu do hiago",
+        "categoria": "alimentação",
+        "valor": 10.0,
+        "data": "05/05/2026 15:02"
     }
 ]
