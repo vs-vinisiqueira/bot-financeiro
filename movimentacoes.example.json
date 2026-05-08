@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "tipo": "receita",
+        "descricao": "salario exemplo",
+        "categoria": "salario",
+        "valor": 1000.0,
+        "data": "01/01/2026 09:00",
+        "user_id": 123456789012345678,
+        "user_name": "usuario_exemplo",
+        "guild_id": 987654321098765432,
+        "guild_name": "Servidor Exemplo",
+        "interaction_id": "111111111111111111"
+    },
+    {
+        "id": 2,
+        "tipo": "despesa",
+        "descricao": "mercado exemplo",
+        "categoria": "alimentacao",
+        "valor": 150.0,
+        "data": "02/01/2026 18:30",
+        "user_id": 123456789012345678,
+        "user_name": "usuario_exemplo",
+        "guild_id": 987654321098765432,
+        "guild_name": "Servidor Exemplo",
+        "interaction_id": "222222222222222222"
+    }
+]

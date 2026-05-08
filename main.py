@@ -1,7 +1,7 @@
 from finance_service import (
     adicionar_movimentacao,
     calcular_resumo,
-    deletar_movimentacao,
+    deletar_movimentacao_geral,
     listar_movimentacoes,
 )
 from formatters import formatar_moeda
@@ -92,7 +92,7 @@ def apagar_movimentacao():
         print("Digite um ID valido.")
         return
 
-    movimentacao = deletar_movimentacao(id_movimentacao)
+    movimentacao = deletar_movimentacao_geral(id_movimentacao)
 
     if movimentacao is None:
         print("Movimentacao nao encontrada.")

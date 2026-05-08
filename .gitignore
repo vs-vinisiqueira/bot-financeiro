@@ -1,5 +1,8 @@
 __pycache__/
 *.pyc
+*.log
+.tmp/
 .env
 .venv/
 venv/
+movimentacoes.json
