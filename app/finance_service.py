@@ -1,7 +1,7 @@
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
 
-from storage import atualizar_movimentacoes, carregar_movimentacoes
+from app.storage import atualizar_movimentacoes, carregar_movimentacoes
 
 
 USUARIO_TERMINAL_ID = "terminal"

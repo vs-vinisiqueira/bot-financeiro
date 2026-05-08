@@ -1,13 +1,48 @@
 # Bot Financeiro
 
-Projeto simples de controle financeiro em Python com duas interfaces:
+Bot financeiro em Python para registrar receitas e despesas pelo Discord ou por um menu no terminal. O projeto usa armazenamento local em JSON e foi organizado como pacote Python para facilitar manutenção, testes e publicação no GitHub.
 
-- bot para Discord com slash commands;
-- menu no terminal.
+## Tecnologias
 
-Os dados ficam salvos localmente no arquivo `movimentacoes.json`. Ainda nao ha banco de dados, FastAPI ou Google Sheets.
+- Python
+- discord.py
+- python-dotenv
+- Pytest
+- JSON para persistencia local
 
-O bot suporta multiplos usuarios no mesmo servidor. Cada nova movimentacao salva pelo Discord recebe `user_id`, `user_name`, `guild_id` e `guild_name`, permitindo separar os lancamentos de cada pessoa.
+## Funcionalidades
+
+- Cadastro de receitas e despesas.
+- Listagem de movimentacoes.
+- Calculo de receitas, despesas e saldo.
+- Exclusao de movimentacoes por ID.
+- Slash commands no Discord.
+- Modo terminal para uso local/admin.
+- Separacao de movimentacoes por usuario e servidor no Discord.
+- Protecao contra sobrescrita quando o JSON esta invalido.
+
+## Estrutura
+
+```text
+bot-financeiro/
+├── app/
+│   ├── __init__.py
+│   ├── bot.py
+│   ├── cli.py
+│   ├── finance_service.py
+│   ├── storage.py
+│   └── formatters.py
+├── data/
+│   └── movimentacoes.example.json
+├── tests/
+│   └── test_finance_service.py
+├── .env.example
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
+
+O arquivo real `data/movimentacoes.json` e criado automaticamente quando a primeira movimentacao e salva. Ele fica fora do Git para evitar publicar dados pessoais.
 
 ## Instalar dependencias
 
@@ -15,51 +50,58 @@ O bot suporta multiplos usuarios no mesmo servidor. Cada nova movimentacao salva
 pip install -r requirements.txt
 ```
 
-## Configurar o token do Discord
+## Configurar ambiente
 
-Crie um arquivo chamado `.env` na raiz do projeto e adicione:
+Crie um arquivo `.env` na raiz do projeto:
 
 ```env
 DISCORD_TOKEN=seu_token_real_do_discord
 ```
 
-Use o arquivo `.env.example` como modelo. Nunca coloque o token real no codigo.
+Use `.env.example` como referencia. Nunca publique o `.env` nem tokens reais.
 
-## Rodar o bot do Discord
+## Rodar o bot Discord
 
 ```bash
-python bot.py
+python -m app.bot
 ```
+
+Comandos disponiveis:
+
+- `/receita`: cadastra uma receita.
+- `/despesa`: cadastra uma despesa.
+- `/resumo`: mostra o resumo pessoal no servidor atual.
+- `/listar`: lista suas ultimas movimentacoes no servidor atual.
+- `/deletar`: remove uma movimentacao sua pelo ID.
+- `/categoria`: lista suas movimentacoes por categoria.
+- `/resumo_geral`: mostra o resumo geral do servidor.
+- `/listar_geral`: lista as ultimas movimentacoes do servidor.
 
 ## Rodar a versao terminal
 
 ```bash
-python main.py
+python -m app.cli
 ```
 
-## Comandos do Discord
+O terminal funciona como ferramenta local/admin e opera sobre todas as movimentacoes salvas em `data/movimentacoes.json`.
 
-- `/receita`: cadastra uma receita.
-- `/despesa`: cadastra uma despesa.
-- `/resumo`: mostra apenas as suas receitas, despesas e saldo no servidor atual.
-- `/listar`: lista apenas as suas ultimas 10 movimentacoes no servidor atual.
-- `/deletar`: deleta uma movimentacao sua pelo ID no servidor atual.
-- `/categoria`: lista apenas as suas movimentacoes de uma categoria no servidor atual.
-- `/resumo_geral`: mostra o resumo geral do servidor atual.
-- `/listar_geral`: lista as ultimas 10 movimentacoes do servidor atual.
+## Rodar testes
 
-## Comandos pessoais e gerais
-
-Os comandos pessoais (`/resumo`, `/listar`, `/categoria` e `/deletar`) usam o usuario que executou o comando e o servidor atual como filtro. Assim, um usuario nao ve nem apaga movimentacoes de outro usuario.
-
-Os comandos gerais (`/resumo_geral` e `/listar_geral`) mostram dados agregados do servidor atual, filtrando por `guild_id`. Eles sao bloqueados em mensagem direta para nao misturar dados de usuarios diferentes.
-
-Se o bot for usado por mensagem direta, o servidor fica registrado como `DM`.
+```bash
+pytest
+```
 
 ## Armazenamento
 
-O arquivo `movimentacoes.json` e a fonte dos dados do projeto. Se ele ja tiver dados, eles devem ser preservados. Movimentacoes antigas sem `user_id` ou `guild_id` continuam no arquivo, mas os comandos pessoais do Discord usam apenas movimentacoes novas que tenham identificacao de usuario e servidor.
+- Exemplo publico: `data/movimentacoes.example.json`
+- Arquivo real local: `data/movimentacoes.json`
 
-Se o JSON estiver invalido, o sistema interrompe a leitura/gravacao e pede correcao do arquivo em vez de salvar por cima do historico. As gravacoes tambem sao feitas por arquivo temporario para reduzir risco de corromper dados.
+Se `data/movimentacoes.json` nao existir, o sistema inicia com uma lista vazia e cria o arquivo na primeira gravacao. Se o JSON estiver invalido, a aplicacao interrompe a gravacao para preservar o historico.
 
-O terminal funciona como ferramenta local/admin: lista, resume e deleta movimentacoes globais do arquivo.
+## Proximas melhorias
+
+- Criar camada de banco de dados.
+- Adicionar filtros por periodo.
+- Exportar relatorios em CSV.
+- Melhorar permissao dos comandos gerais no Discord.
+- Adicionar testes para comandos do bot.

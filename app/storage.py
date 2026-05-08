@@ -4,7 +4,8 @@ import threading
 from pathlib import Path
 
 
-ARQUIVO_MOVIMENTACOES = Path(__file__).with_name("movimentacoes.json")
+RAIZ_PROJETO = Path(__file__).resolve().parent.parent
+ARQUIVO_MOVIMENTACOES = RAIZ_PROJETO / "data" / "movimentacoes.json"
 _LOCK = threading.RLock()
 
 
@@ -20,6 +21,7 @@ def carregar_movimentacoes():
 
 def _carregar_movimentacoes_sem_lock():
     if not ARQUIVO_MOVIMENTACOES.exists():
+        _salvar_movimentacoes_sem_lock([])
         return []
 
     conteudo = ARQUIVO_MOVIMENTACOES.read_text(encoding="utf-8").strip()

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "tipo": "receita",
+    "descricao": "Salário",
+    "categoria": "Renda fixa",
+    "valor": 2500.0,
+    "data": "01/05/2026 09:00"
+  },
+  {
+    "id": 2,
+    "tipo": "despesa",
+    "descricao": "Supermercado",
+    "categoria": "Alimentação",
+    "valor": 150.0,
+    "data": "02/05/2026 18:30"
+  }
+]

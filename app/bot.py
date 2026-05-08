@@ -4,7 +4,7 @@ import discord
 from discord import app_commands
 from dotenv import load_dotenv
 
-from finance_service import (
+from app.finance_service import (
     adicionar_movimentacao,
     calcular_resumo_geral,
     calcular_resumo_usuario,
@@ -13,7 +13,7 @@ from finance_service import (
     listar_movimentacoes_usuario,
     listar_por_categoria_usuario,
 )
-from formatters import formatar_moeda
+from app.formatters import formatar_moeda
 
 
 load_dotenv()

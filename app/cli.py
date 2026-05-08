@@ -1,10 +1,10 @@
-from finance_service import (
+from app.finance_service import (
     adicionar_movimentacao,
     calcular_resumo,
     deletar_movimentacao_geral,
     listar_movimentacoes,
 )
-from formatters import formatar_moeda
+from app.formatters import formatar_moeda
 
 
 def mostrar_menu():
